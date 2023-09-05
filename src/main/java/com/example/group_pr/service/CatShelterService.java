@@ -19,10 +19,9 @@ import java.util.Collection;
 @Data
 @Service
 public class CatShelterService {
-
     private final CatRepository catRepository;
 
-    private static final Logger logger = LoggerFactory.getLogger(DogShelterService.class);
+    private static final Logger logger = LoggerFactory.getLogger(CatShelterService.class);
 
     public CatShelterService(CatRepository catRepository) {
         this.catRepository = catRepository;
@@ -37,22 +36,22 @@ public class CatShelterService {
      * @return созданный объект класса Cat
      */
     public Cat createCat(Cat cat) {
-        logger.info("Create dog method was invoked");
+        logger.info("Create cat method was invoked");
         catRepository.save(cat);
-        logger.info("Dog {} was created successfully", cat);
+        logger.info("Cat {} was created successfully", cat);
         return cat;
     }
 
     /**
-     * Поиск объекта класса Dog по его идентификатору
+     * Поиск объекта класса Cat по его идентификатору
      * <br>
      * Используется метод репозитория {@link org.springframework.data.jpa.repository.JpaRepository#findById(Object)}
      *
-     * @param catId идентификатор искомого объекта класса Dog, не может быть null
-     * @return найденный объект класса Dog
-     * @throws CatNotFoundException если объект класса Dog не был найден в БД
+     * @param catId идентификатор искомого объекта класса Cat, не может быть null
+     * @return найденный объект класса Cat
+     * @throws CatNotFoundException если объект класса Cat не был найден в БД
      */
-    public Cat findDogById(Long catId) {
+    public Cat findCatById(Long catId) {
         logger.info("Find cat by id = {} method was invoked", catId);
         Cat cat = catRepository.findById(catId).orElseThrow(CatNotFoundException::new);
         logger.info("Cat with id = {} was successfully found", catId);
@@ -60,34 +59,34 @@ public class CatShelterService {
     }
 
     /**
-     * Получение коллекции объектов класса Dog из БД
+     * Получение коллекции объектов класса Cat из БД
      * <br>
      * Используется метод репозитория {@link org.springframework.data.jpa.repository.JpaRepository#findAll()}
      *
-     * @return коллекция объектов класса Dog
+     * @return коллекция объектов класса Cat
      */
-    public Collection<Cat> findAllDogs() {
-        logger.info("Find all dogs method was invoked");
+    public Collection<Cat> findAllCats() {
+        logger.info("Find all Cats method was invoked");
         Collection<Cat> cats = catRepository.findAll();
         logger.info("All cats were successfully found");
         return cats;
     }
 
     /**
-     * Изменение объекта класса Dog и сохранение его в БД
+     * Изменение объекта класса Cat и сохранение его в БД
      * <br>
      * Используется метод репозитория {@link org.springframework.data.jpa.repository.JpaRepository#save(Object)}
      *
      * @param cat объект класса Cat, не может быть null
      * @return изменённый объект класса Cat
-     * @throws CatNotFoundException если объект класса Dog не был найден в БД
+     * @throws CatNotFoundException если объект класса Cat не был найден в БД
      */
-    public Cat updateDog(Cat cat) {
-        logger.info("Update dog: {} method was invoked", cat);
+    public Cat updateCat(Cat cat) {
+        logger.info("Update Cat: {} method was invoked", cat);
         if (cat.getId() != null) {
-            if (findDogById(cat.getId()) != null) {
+            if (findCatById(cat.getId()) != null) {
                 catRepository.save(cat);
-                logger.info("Dog {} was updated successfully", cat);
+                logger.info("Cat {} was updated successfully", cat);
                 return cat;
             }
         }

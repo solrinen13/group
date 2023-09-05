@@ -2,9 +2,12 @@ package com.example.group_pr.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "cat_owner")
 public class CatOwner {
     @Id
@@ -24,4 +27,9 @@ public class CatOwner {
 
     @Enumerated
     private OwnerStatus status;
+
+    public CatOwner(long l, String testFullName, int i, String testAddress, String testPhoneNumber) {
+    }
+
+
 }
