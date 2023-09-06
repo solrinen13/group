@@ -3,11 +3,13 @@
 * Project function: ...
 ## Technologies
 - Spring Boot
-- Maven.
+- Maven
 - Hibernate
 - PostgreSQL
 - Liquibase
 
-## Testing - JUnit, Mockito
+## Testing 
+- JUnit
+- Mockito
 ### Language
 - Java 17
