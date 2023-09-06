@@ -25,4 +25,10 @@ public class Cat {
     @Column(name = "description")
     private String description;  // описание питомца
 
+    public Cat(long l, String cat, int i, String persian, String description) {
+    }
+
+    public Cat() {
+
+    }
 }

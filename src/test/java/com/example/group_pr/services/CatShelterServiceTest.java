@@ -40,11 +40,11 @@ public class CatShelterServiceTest {
         testOne.setCatBreed("Рыжая");
         testOne.setDescription("Рыжая, шумная");
 
-        testOne.setId(2L);
-        testOne.setNickName("Степан");
-        testOne.setAge(3);
-        testOne.setCatBreed("Полосатая");
-        testOne.setDescription("Полосатый и игривый");
+        testTwo.setId(2L);
+        testTwo.setNickName("Степан");
+        testTwo.setAge(3);
+        testTwo.setCatBreed("Полосатая");
+        testTwo.setDescription("Полосатый и игривый");
 
         listTest.add(testOne);
         listTest.add(testTwo);

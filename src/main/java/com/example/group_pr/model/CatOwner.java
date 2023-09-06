@@ -32,4 +32,6 @@ public class CatOwner {
     }
 
 
+    public CatOwner(long l, String testFullName, int i, String testAddress, String testPhoneNumber, Long chatId, OwnerStatus ownerStatus) {
+    }
 }
