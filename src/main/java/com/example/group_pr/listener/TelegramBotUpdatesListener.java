@@ -2,6 +2,9 @@ package com.example.group_pr.listener;
 
 import com.example.group_pr.keyboards.AnimalShelterKeyboard;
 import com.example.group_pr.model.AnimalReportData;
+import com.example.group_pr.model.CatOwner;
+import com.example.group_pr.model.DogOwner;
+import com.example.group_pr.model.OwnerStatus;
 import com.example.group_pr.repository.AnimalReportDataRepository;
 import com.example.group_pr.repository.CatOwnerRepository;
 import com.example.group_pr.repository.DogOwnerRepository;
@@ -116,7 +119,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                         sendMessage(chatId, "Отчет нужно присылать с описанием!");
                     }
                     if (update.message() != null && update.message().contact() != null) {
-                        // getOwnerContactData(update);
+                        getOwnerContactData(update);
                     }
 
                     switch (messageText) {
@@ -318,31 +321,31 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         }
     }
 
-//    public void getOwnerContactData(Update update) {
-//        logger.info("Get owner contact data method was invoked");
-//        if (update.message().contact() != null) {
-//            String firstName = update.message().contact().firstName();
-//            String phone = update.message().contact().phoneNumber();
-//            Long chatId = update.message().chat().id();
-//            DogOwner dogOwnerWithChatId = dogOwnerRepository.findByChatId(chatId);
-//            CatOwner catOwnerWithChatId = catOwnerRepository.findByChatId(chatId);
-//            if (dogOwnerWithChatId != null || catOwnerWithChatId != null) {
-//                sendMessage(chatId, "Вы уже в базе!");
-//                logger.info("Owner contact data already in database");
-//                return;
-//            }
-//            if (isCat) {
-//                catOwnerRepository.save(new CatOwner(chatId, firstName, phone, OwnershipStatus.SEARCH));
-//            } else {
-//                dogOwnerRepository.save(new DogOwner(chatId, firstName, phone, OwnershipStatus.SEARCH));
-//            }
-//            sendMessage(chatId, "Вас успешно добавили в базу! Скоро вам перезвонят.");
-//            logger.info("Owner contact data was registered successfully");
-//            // Сообщение в чат добровольцам
-//            sendMessage(TELEGRAM_CHAT_VOLUNTEER, firstName + " " + phone + " Добавил(а) свой номер в базу");
-//            sendForwardMessage(chatId, update.message().messageId());
-//        }
-//    }
+    public void getOwnerContactData(Update update) {
+        logger.info("Get owner contact data method was invoked");
+        if (update.message().contact() != null) {
+            String firstName = update.message().contact().firstName();
+            String phone = update.message().contact().phoneNumber();
+            Long chatId = update.message().chat().id();
+            DogOwner dogOwnerWithChatId = dogOwnerRepository.findByChatId(chatId);
+            CatOwner catOwnerWithChatId = catOwnerRepository.findByChatId(chatId);
+            if (dogOwnerWithChatId != null || catOwnerWithChatId != null) {
+                sendMessage(chatId, "Вы уже в базе!");
+                logger.info("Owner contact data already in database");
+                return;
+            }
+            if (isCat) {
+                catOwnerRepository.save(new CatOwner(chatId, firstName, phone, OwnerStatus.SEARCH));
+            } else {
+                dogOwnerRepository.save(new DogOwner(chatId, firstName, phone, OwnerStatus.SEARCH));
+            }
+            sendMessage(chatId, "Вас успешно добавили в базу! Скоро вам перезвонят.");
+            logger.info("Owner contact data was registered successfully");
+            // Сообщение в чат добровольцам
+            sendMessage(TELEGRAM_CHAT_VOLUNTEER, firstName + " " + phone + " Добавил(а) свой номер в базу");
+            sendForwardMessage(chatId, update.message().messageId());
+        }
+   }
 
     public void getReport(Update update) {
         logger.info("Get report method was invoked");

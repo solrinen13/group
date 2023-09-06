@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -75,9 +76,7 @@ public class CatOwnerControllerTest {
     @DisplayName("Проверка метода создания владельца кошки")
     void createCatOwnerTest() throws Exception {
 
-
-        Mockito.when(catOwnerService.createCatOwner(testOne)).thenReturn(testOne);
-
+        when(catOwnerService.createCatOwner(testOne)).thenReturn(testOne);
         mvc.perform(MockMvcRequestBuilders
                         .post("/cat_owner")
                         .content(objectMapper.writeValueAsString(testOne))
@@ -105,7 +104,7 @@ public class CatOwnerControllerTest {
     void getCatOwnerByIdTest() throws Exception {
 
 
-        Mockito.when(catOwnerService.findCatOwnerById(any(Long.class))).thenReturn(testOne);
+        when(catOwnerService.findCatOwnerById(any(Long.class))).thenReturn(testOne);
 
         mvc.perform(MockMvcRequestBuilders
                         .get("/cat_owner/{catOwnerId}", 1L)
@@ -132,7 +131,7 @@ public class CatOwnerControllerTest {
     void getCatOwnerByChatIdTest() throws Exception {
 
         catOwnerService.createCatOwner(testOne);
-        Mockito.when(catOwnerService.findCatOwnerByChatId(any(Long.class))).thenReturn(testOne);
+        when(catOwnerService.findCatOwnerByChatId(any(Long.class))).thenReturn(testOne);
         mvc.perform(MockMvcRequestBuilders
                         .get("/cat_owner/findByChatId")
                         .param("chatId", String.valueOf(123L))
@@ -163,7 +162,7 @@ public class CatOwnerControllerTest {
 
         expected.add(testOne);
         expected.add(testTwo);
-        Mockito.when(catOwnerService.findAllCatOwners()).thenReturn(expected);
+        when(catOwnerService.findAllCatOwners()).thenReturn(expected);
 
         mvc.perform(MockMvcRequestBuilders
                         .get("/cat_owner")
@@ -184,7 +183,7 @@ public class CatOwnerControllerTest {
     @Test
     @DisplayName("Проверка метода изменения (обновления) данных хозяина кошки")
     void updateCatOwnerTest() throws Exception {
-        Mockito.when(catOwnerService.updateCatOwner(testOne)).thenReturn(testOne);
+        when(catOwnerService.updateCatOwner(testOne)).thenReturn(testOne);
 
         mvc.perform(MockMvcRequestBuilders
                         .put("/cat_owner")
