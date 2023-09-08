@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,13 +40,13 @@ public class CatController {
                     content = {
                             @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    array = @ArraySchema(schema =
-                                    @Schema(implementation = Cat.class))
+                                    schema =
+                                    @Schema(implementation = Cat.class)
                             )
                     }
             )
     })
-    public ResponseEntity<Cat> createCat(@RequestBody Cat cat) {
+    public ResponseEntity<Cat> createCat(@RequestBody(required = true) Cat cat) {
         Cat createdCat = catShelterService.createCat(cat);
         return ResponseEntity.ok(createdCat);
     }

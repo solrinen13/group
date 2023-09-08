@@ -24,4 +24,11 @@ public class DogOwner {
 
     @Enumerated
     private OwnerStatus status;
+
+    public DogOwner(Long chatId, String firstName, String phone, OwnerStatus ownerStatus) {
+    }
+
+    public DogOwner() {
+
+    }
 }
