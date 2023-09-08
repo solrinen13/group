@@ -1,4 +1,4 @@
-package com.example.group_pr.controllers.keyboards;
+package com.example.group_pr.keyboards;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.request.KeyboardButton;
